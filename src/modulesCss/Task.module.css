@@ -1,0 +1,33 @@
+.liWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    accent-color: #3a9f21;
+}
+
+.checkbox {
+    border: 5px solid darkslategrey;
+    cursor: pointer;
+    margin: 0;
+}
+
+.textTodo {
+    padding-left: 8px;
+    font-size: 16px;
+}
+
+.buttonWrapper {
+    display: flex;
+   justify-content: start;
+    margin-left: auto;
+    gap: 5px;
+    padding:0 30px 0 10px;
+    font-size: 13px;
+    background-color: transparent;
+}

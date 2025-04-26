@@ -1,0 +1,34 @@
+body {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  font-family: "Roboto Light", serif;
+}
+
+.title {
+  margin: 0;
+  font-weight: bold;
+  font-size: 36px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.title2 {
+  margin: 0;
+  padding: 20px 0 20px 30px;
+  font-size: 22px;
+}
+
+.taskWrapper {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-left: 30px;
+}
+
+
+
+

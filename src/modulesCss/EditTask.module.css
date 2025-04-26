@@ -1,0 +1,20 @@
+
+
+.buttonEdit {
+    background-color: transparent;
+    border: 1px solid darkslategrey;
+    margin-right: auto;
+}
+
+.buttonDelete {
+    background-color: #ff3939;
+    color: white;
+    border: none;
+}
+
+.buttonEdit, .buttonDelete {
+    width: 105px;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 4px 8px ;
+}
