@@ -1,18 +1,25 @@
 import styles from "../modulesCss/EditInput.module.css";
 import { useCallback, useState } from "react";
-import { EditInputProps } from "../type/types.ts";
+import { Id } from "../type/types.ts";
 import * as React from "react";
+import { useTaskContext } from "../context/TaskContext.ts";
 
-export const EditInput = (props: EditInputProps) => {
+interface EditInputProps {
+  id: Id;
+  setIsEdit: (isEdit: boolean) => void;
+}
+
+export const EditInput = ({ id, setIsEdit }: EditInputProps) => {
+  const { editTask } = useTaskContext();
   const [text, setText] = useState("");
   const onClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      props.editTask(text, props.id);
-      props.setIsEdit(false);
+      editTask(text, id);
+      setIsEdit(false);
       setText("");
     },
-    [props, text],
+    [editTask, id, setIsEdit, text],
   );
 
   return (
@@ -29,7 +36,7 @@ export const EditInput = (props: EditInputProps) => {
       <button
         className={styles.buttonCancel}
         type="button"
-        onClick={() => props.setIsEdit(false)}
+        onClick={() => setIsEdit(false)}
       >
         Отмена
       </button>

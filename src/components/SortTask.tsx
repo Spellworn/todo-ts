@@ -1,27 +1,31 @@
 import styles from "../modulesCss/SortTask.module.css";
-import { SortTaskProps } from "../type/types.ts";
+import { FilterType } from "../type/types.ts";
 
-export const SortTask = (props: SortTaskProps) => {
+interface SortTaskProps {
+  setFilter: (filter: FilterType) => void;
+}
+
+export const SortTask = ({ setFilter }: SortTaskProps) => {
   return (
     <div className={styles.buttonWrapper}>
       <button
         className={styles.buttonSort}
         type="button"
-        onClick={() => props.setFilter("all")}
+        onClick={() => setFilter("all")}
       >
         Все задания
       </button>
       <button
         className={styles.buttonSort}
         type="button"
-        onClick={() => props.setFilter("completed")}
+        onClick={() => setFilter("completed")}
       >
         Выполненные
       </button>
       <button
         className={styles.buttonSort}
         type="button"
-        onClick={() => props.setFilter("uncompleted")}
+        onClick={() => setFilter("uncompleted")}
       >
         Еще нада сделат
       </button>

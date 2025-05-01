@@ -2,11 +2,18 @@ import styles from "../modulesCss/Task.module.css";
 import { EditTask } from "./EditTask.tsx";
 import { DeleteTask } from "./DeleteTask.tsx";
 import { useState } from "react";
-import { TaskProps } from "../type/types.ts";
+import { Id } from "../type/types.ts";
+import { useTaskContext } from "../context/TaskContext.ts";
 
-export const Task = (props: TaskProps) => {
+interface TaskProps {
+  id: Id;
+  name: string;
+  completed: boolean;
+}
+
+export const Task = ({ id, name, completed }: TaskProps) => {
   const [isEdit, setIsEdit] = useState(false);
-
+  const { completeTask } = useTaskContext();
   const toggleEdit = () => {
     setIsEdit((prev) => !prev);
   };
@@ -17,26 +24,24 @@ export const Task = (props: TaskProps) => {
         <>
           <input
             className={styles.checkbox}
-            id={String(props.id)}
+            id={String(id)}
             type="checkbox"
-            defaultChecked={props.completed}
-            onClick={() => props.completeTask(props.id)}
+            defaultChecked={completed}
+            onClick={() => completeTask(id)}
           />
-          <label className={styles.textTodo} htmlFor={String(props.id)}>
-            {props.name}
+          <label className={styles.textTodo} htmlFor={String(id)}>
+            {name}
           </label>
         </>
       )}
       <div className={styles.buttonWrapper}>
         <EditTask
-          editTask={props.editTask}
-          id={props.id}
-          name={props.name}
+          id={id}
           isEdit={isEdit}
           toggleEdit={toggleEdit}
           setIsEdit={setIsEdit}
         />
-        {!isEdit && <DeleteTask deleteTask={props.deleteTask} id={props.id} />}
+        {!isEdit && <DeleteTask id={id} />}
       </div>
     </li>
   );

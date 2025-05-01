@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Task } from "../type/types";
+import type { FilterType, Tasks } from "../type/types";
 
-export const useFilter = (props: Task[]) => {
-  const [filter, setFilter] = useState("all");
+export const useFilter = (props: Tasks[]) => {
+  const [filter, setFilter] = useState<FilterType>("all");
   const [filteredTask, setFilteredTask] = useState(props);
 
   useEffect(() => {

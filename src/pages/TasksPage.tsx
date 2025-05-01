@@ -4,10 +4,13 @@ import { SortTask } from "../components/SortTask.tsx";
 import { TaskList } from "../components/TaskList.tsx";
 import { useData } from "../hooks/useData.ts";
 import { useFilter } from "../hooks/useFilter.ts";
+import { TaskContext } from "../context/TaskContext.ts";
 
 export const TasksPage = () => {
   const { addNewTask, completeTask, editTask, deleteTask, data } = useData();
   const [setFilter, filteredTask] = useFilter(data);
+
+  console.log(filteredTask);
 
   return (
     <section>
@@ -17,13 +20,9 @@ export const TasksPage = () => {
       <h3 className={styles.title2}>
         {filteredTask !== undefined && filteredTask.length} задания осталос
       </h3>
-
-      <TaskList
-        tasks={filteredTask}
-        deleteTask={deleteTask}
-        editTask={editTask}
-        completeTask={completeTask}
-      />
+      <TaskContext.Provider value={{ deleteTask, editTask, completeTask }}>
+        <TaskList tasks={filteredTask} />
+      </TaskContext.Provider>
     </section>
   );
 };

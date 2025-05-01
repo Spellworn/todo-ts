@@ -1,13 +1,20 @@
 import styles from "../modulesCss/EditTask.module.css";
-import { DeleteTaskProps } from "../type/types.ts";
+import { Id } from "../type/types.ts";
+import { useTaskContext } from "../context/TaskContext.ts";
 
-export const DeleteTask = (props: DeleteTaskProps) => {
+interface DeleteTaskProps {
+  id: Id;
+}
+
+export const DeleteTask = ({ id }: DeleteTaskProps) => {
+  const { deleteTask } = useTaskContext();
+
   return (
     <button
-      id={String(props.id)}
+      id={String(id)}
       className={styles.buttonDelete}
       type="button"
-      onClick={() => props.deleteTask(props.id)}
+      onClick={() => deleteTask(id)}
     >
       Удалит
     </button>

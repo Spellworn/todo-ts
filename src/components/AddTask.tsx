@@ -1,18 +1,20 @@
 import styles from "../modulesCss/AddTask.module.css";
 import { useCallback, useState } from "react";
-import * as React from "react";
-import { AddTaskProps } from "../type/types.ts";
+import { MouseEvent } from "react";
 
-// Компонент AddTask
-export const AddTask = (props: AddTaskProps) => {
+interface AddTaskProps {
+  addNewTask: (text: string) => void;
+}
+
+export const AddTask = ({ addNewTask }: AddTaskProps) => {
   const [text, setText] = useState("");
   const onClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      props.addNewTask(text);
+      addNewTask(text);
       setText("");
     },
-    [props, text],
+    [addNewTask, text],
   );
 
   return (

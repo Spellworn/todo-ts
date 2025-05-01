@@ -6,20 +6,19 @@ export const useData = () => {
   const [data, setData] = useState<Todo[]>([]);
   const url = "https://dummyjson.com/todos";
 
-  async function getData() {
-    try {
-      const response = await fetch(url);
-      const result: Data = await response.json();
-      return result;
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch(url);
+        const result: Data = await response.json();
+        return result;
+      } catch (e) {
+        console.error(e);
+      }
+    };
     getData().then((response) => {
       if (response) {
-        setData(response.todos); // Установка данных из ответа
+        setData(response.todos);
       }
     });
   }, []);
@@ -38,7 +37,7 @@ export const useData = () => {
     setData((prev) =>
       prev.map((task) => {
         if (task.id === id && text !== null) {
-          return { ...task, name: text };
+          return { ...task, todo: text };
         }
         if (task.id === id && text === null) {
           return { ...task, completed: !task.completed };
