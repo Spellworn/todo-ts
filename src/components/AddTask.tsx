@@ -1,20 +1,19 @@
 import styles from "../modulesCss/AddTask.module.css";
 import { useCallback, useState } from "react";
 import { MouseEvent } from "react";
+import { handleAddNewTask } from "../redux/toDoSlice.ts";
+import { useAppDispatch } from "../redux/hooks.ts";
 
-interface AddTaskProps {
-  addNewTask: (text: string) => void;
-}
-
-export const AddTask = ({ addNewTask }: AddTaskProps) => {
+export const AddTask = () => {
+  const dispatch = useAppDispatch();
   const [text, setText] = useState("");
   const onClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      addNewTask(text);
+      dispatch(handleAddNewTask(text));
       setText("");
     },
-    [addNewTask, text],
+    [dispatch, text],
   );
 
   return (

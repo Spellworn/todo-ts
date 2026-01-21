@@ -4,25 +4,22 @@ import { SortTask } from "../components/SortTask.tsx";
 import { TaskList } from "../components/TaskList.tsx";
 import { useData } from "../hooks/useData.ts";
 import { useFilter } from "../hooks/useFilter.ts";
-import { TaskContext } from "../context/TaskContext.ts";
+import { store } from "../redux/store.ts";
 
 export const TasksPage = () => {
-  const { addNewTask, completeTask, editTask, deleteTask, data } = useData();
-  const [setFilter, filteredTask] = useFilter(data);
+  const { todos } = useData();
+  const [setFilter, filteredTask] = useFilter(todos);
 
-  console.log(filteredTask);
-
+  console.log(store.getState());
   return (
     <section>
       <h1 className={styles.title}>Домашнее задание слушаем</h1>
-      <AddTask addNewTask={addNewTask} />
+      <AddTask />
       <SortTask setFilter={setFilter} />
       <h3 className={styles.title2}>
         {filteredTask !== undefined && filteredTask.length} задания осталос
       </h3>
-      <TaskContext.Provider value={{ deleteTask, editTask, completeTask }}>
-        <TaskList tasks={filteredTask} />
-      </TaskContext.Provider>
+      <TaskList tasks={filteredTask} />
     </section>
   );
 };
