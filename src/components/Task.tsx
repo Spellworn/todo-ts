@@ -3,7 +3,8 @@ import { EditTask } from "./EditTask.tsx";
 import { DeleteTask } from "./DeleteTask.tsx";
 import { useState } from "react";
 import { Id } from "../type/types.ts";
-import { useTaskContext } from "../context/TaskContext.ts";
+import { handleUpdateTask } from "../redux/toDoSlice.ts";
+import { useAppDispatch } from "../redux/hooks.ts";
 
 interface TaskProps {
   id: Id;
@@ -13,7 +14,7 @@ interface TaskProps {
 
 export const Task = ({ id, name, completed }: TaskProps) => {
   const [isEdit, setIsEdit] = useState(false);
-  const { completeTask } = useTaskContext();
+  const dispatch = useAppDispatch();
   const toggleEdit = () => {
     setIsEdit((prev) => !prev);
   };
@@ -27,7 +28,7 @@ export const Task = ({ id, name, completed }: TaskProps) => {
             id={String(id)}
             type="checkbox"
             defaultChecked={completed}
-            onClick={() => completeTask(id)}
+            onClick={() => dispatch(handleUpdateTask({ id, text: null }))}
           />
           <label className={styles.textTodo} htmlFor={String(id)}>
             {name}

@@ -2,7 +2,8 @@ import styles from "../modulesCss/EditInput.module.css";
 import { useCallback, useState } from "react";
 import { Id } from "../type/types.ts";
 import * as React from "react";
-import { useTaskContext } from "../context/TaskContext.ts";
+import { handleUpdateTask } from "../redux/toDoSlice.ts";
+import { useAppDispatch } from "../redux/hooks.ts";
 
 interface EditInputProps {
   id: Id;
@@ -10,16 +11,16 @@ interface EditInputProps {
 }
 
 export const EditInput = ({ id, setIsEdit }: EditInputProps) => {
-  const { editTask } = useTaskContext();
+  const dispatch = useAppDispatch();
   const [text, setText] = useState("");
   const onClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      editTask(text, id);
+      dispatch(handleUpdateTask({ id, text }));
       setIsEdit(false);
       setText("");
     },
-    [editTask, id, setIsEdit, text],
+    [dispatch, id, setIsEdit, text],
   );
 
   return (
